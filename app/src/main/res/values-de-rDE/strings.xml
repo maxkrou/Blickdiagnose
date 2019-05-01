@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Blickdiagnose</string>
+    <string name="quick_start_button">Schnellstart</string>
+    <string name="individual_start_button">Individueller Start</string>
+    <string name="statistics_button">Statistiken</string>
+    <string name="settings_button">Einstellungen</string>
+    <string name="what_is_the_diagnosis">Wie lautet die Diagnose?</string>
+    <string name="show_answer_button">Antwort zeigen</string>
+    <string name="correct_answer_button">Richtig</string>
+    <string name="wrong_answer_button">Falsch</string>
+    <string name="answer_textfield">Antwort</string>
+</resources>
