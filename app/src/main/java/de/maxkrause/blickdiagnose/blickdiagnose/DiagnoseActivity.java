@@ -1,7 +1,10 @@
 package de.maxkrause.blickdiagnose.blickdiagnose;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
+import android.os.Environment;
 import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -58,12 +61,25 @@ public class DiagnoseActivity extends AppCompatActivity {
         textViewAnswer.setVisibility(View.GONE);
 
 
-        File imgFile = new File(dias.get(0).getImage_path());
-      //  if(imgFile.exists())
-        //{
-            Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
-            imageViewDiagnosisImage.setImageBitmap(myBitmap);
-        //}
+
+
+        Context context = imageViewDiagnosisImage.getContext();
+        int id = context.getResources().getIdentifier(dias.get(0).getImage_path(), "drawable", context.getPackageName());
+        imageViewDiagnosisImage.setImageResource(id);
+
+
+
+
+        //imageViewDiagnosisImage.setImageBitmap(BitmapFactory.decodeFile("drawable/hufeisenniere_ct_axial.jpg"));
+
+
+      /*  File sd = Environment.getExternalStorageDirectory();
+        File image = new File(sd+filePath, imageName);
+        BitmapFactory.Options bmOptions = new BitmapFactory.Options();
+        Bitmap bitmap = BitmapFactory.decodeFile(image.getAbsolutePath(),bmOptions);
+        bitmap = Bitmap.createScaledBitmap(bitmap,parent.getWidth(),parent.getHeight(),true);
+        imageView.setImageBitmap(bitmap);*/
+
 
         //add Listeners
 
