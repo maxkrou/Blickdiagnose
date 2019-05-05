@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
         loadDiagnoseMeObjects();
 
         android.support.v7.app.ActionBar actionBar = getSupportActionBar();
-        actionBar.setTitle(getResources().getString(R.string.app_name));
+        //actionBar.setTitle(getResources().getString(R.string.app_name));
 
         cont = this;
         final Context context = this;

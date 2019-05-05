@@ -6,16 +6,21 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.os.Environment;
 import android.provider.ContactsContract;
+import android.support.v4.os.ConfigurationCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toolbar;
 
 import java.io.File;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class DiagnoseActivity extends AppCompatActivity {
 
@@ -27,9 +32,13 @@ public class DiagnoseActivity extends AppCompatActivity {
     TextView textViewWhatIsTheAnswer;
     TextView textViewAnswer;
     ScrollView scrollViewDiagnosisFacts;
+    Toolbar toolbar;
+
 
     DatabaseDiagnosisEntry dia;
     ArrayList<DatabaseDiagnosisEntry> dias = new ArrayList<DatabaseDiagnosisEntry>();
+    ArrayList<DatabaseFactsEntry> facts = new ArrayList<DatabaseFactsEntry>();
+
     DatabaseHelper databaseHelper = new DatabaseHelper(MainActivity.cont);
 
     @Override
@@ -38,6 +47,16 @@ public class DiagnoseActivity extends AppCompatActivity {
         setContentView(R.layout.activity_diagnose);
 
         dias.add(databaseHelper.getDiagnosisEntry(1));
+        facts.addAll(databaseHelper.getAllFactsByDiagnosis(1));
+
+
+        // Attaching the layout to the toolbar object
+        android.support.v7.widget.Toolbar toolbar = findViewById(R.id.tool_bar);
+        // Setting toolbar as the ActionBar with setSupportActionBar() call
+        setSupportActionBar(toolbar);
+
+
+
 
 
 
@@ -66,19 +85,8 @@ public class DiagnoseActivity extends AppCompatActivity {
         Context context = imageViewDiagnosisImage.getContext();
         int id = context.getResources().getIdentifier(dias.get(0).getImage_path(), "drawable", context.getPackageName());
         imageViewDiagnosisImage.setImageResource(id);
+        textViewDiagnosisFacts.setText(facts.get(0).getDiagnosis_fact_english());
 
-
-
-
-        //imageViewDiagnosisImage.setImageBitmap(BitmapFactory.decodeFile("drawable/hufeisenniere_ct_axial.jpg"));
-
-
-      /*  File sd = Environment.getExternalStorageDirectory();
-        File image = new File(sd+filePath, imageName);
-        BitmapFactory.Options bmOptions = new BitmapFactory.Options();
-        Bitmap bitmap = BitmapFactory.decodeFile(image.getAbsolutePath(),bmOptions);
-        bitmap = Bitmap.createScaledBitmap(bitmap,parent.getWidth(),parent.getHeight(),true);
-        imageView.setImageBitmap(bitmap);*/
 
 
         //add Listeners
@@ -92,6 +100,17 @@ public class DiagnoseActivity extends AppCompatActivity {
                 scrollViewDiagnosisFacts.setVisibility(View.VISIBLE);
                 textViewAnswer.setVisibility(View.VISIBLE);
                 textViewAnswer.setText(dias.get(0).getDiagnosis_name_english());
+                textViewDiagnosisFacts.setText("");
+
+
+                ArrayList<DatabaseFactsEntry> allfacts = new ArrayList<DatabaseFactsEntry>();
+                allfacts.addAll(databaseHelper.getAllFactsByDiagnosis(1));
+                for(DatabaseFactsEntry fact:allfacts){
+
+                    textViewDiagnosisFacts.setText(textViewDiagnosisFacts.getText()+"♦ "+fact.getDiagnosis_fact_english()+"\n\n");
+                }
+
+
             }
         });
 
@@ -103,6 +122,7 @@ public class DiagnoseActivity extends AppCompatActivity {
                 buttonWrongAnswer.setVisibility(View.GONE);
                 scrollViewDiagnosisFacts.setVisibility(View.GONE);
                 textViewAnswer.setVisibility(View.GONE);
+
             }
         });
 
@@ -114,6 +134,8 @@ public class DiagnoseActivity extends AppCompatActivity {
                 buttonWrongAnswer.setVisibility(View.GONE);
                 scrollViewDiagnosisFacts.setVisibility(View.GONE);
                 textViewAnswer.setVisibility(View.GONE);
+
+
             }
         });
 
@@ -123,4 +145,14 @@ public class DiagnoseActivity extends AppCompatActivity {
 
 
     }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+       getMenuInflater().inflate(R.menu.menu_info, menu);
+        return true;
+    }
+
+
 }
