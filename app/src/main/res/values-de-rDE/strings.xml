@@ -10,4 +10,5 @@
     <string name="correct_answer_button">Richtig</string>
     <string name="wrong_answer_button">Falsch</string>
     <string name="answer_textfield">Antwort</string>
+    <string name="author_of_this_file">Informationen über den Urheber dieser Datei:</string>
 </resources>

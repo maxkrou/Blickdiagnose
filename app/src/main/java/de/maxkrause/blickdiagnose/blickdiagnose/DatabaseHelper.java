@@ -27,8 +27,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String TABLE_MAIN = "blickdiagnose_names";
     private static final String TABLE_CATS = "diagnosis_cats";
     private static final String TABLE_FACTS = "diagnosis_facts";
+    private static final String TABLE_CITATION = "diagnosis_citation";
     private static final String TABLE_LINK_MAIN_CATS = "linking_diagnosisandcats";
     private static final String TABLE_LINK_MAIN_FACTS = "linking_diagnosisandfacts";
+    private static final String TABLE_LINK_MAIN_CITATION = "linking_diagnosisandcitation";
+
 
     //Common column names
     private static final String KEY_ID ="id";
@@ -54,6 +57,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     //MAIN_FACTS_LINKING_TABLE
     private static final String LINK_DIA_ID_2 = "dia_id";
     private static final String LINK_FACT_ID = "fact_id";
+
+    //CITATION Table - column names
+    private static final String CITATION_ENGLISH = "diagnosis_cit_en";
+    private static final String CITATION_GERMAN = "diagnosis_cit_de";
+
+    //MAIN_CITATION_LINKING_TABLE
+    private static final String LINK_CIT_ID = "cit_id";
+    private static final String LINK_DIA_ID_3 = "dia_id";
 
     //Table Create Statements
     //MAIN Table
@@ -99,6 +110,23 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             +")";
 
 
+    //CITATION Table
+    private static final String CREATE_TABLE_CITATION = "CREATE TABLE " +TABLE_CITATION
+            +"("
+            +KEY_ID+" INTEGER PRIMARY KEY,"
+            +CITATION_ENGLISH+" TEXT,"
+            +CITATION_GERMAN+" TEXT"
+            +")";
+
+    //CITATION and Diagnosis Linking Table
+    private static final String CREATE_LINKING_TABLE_MAIN_CITATION = "CREATE TABLE " +TABLE_LINK_MAIN_CITATION
+            +"("
+            +KEY_ID+" INTEGER PRIMARY KEY,"
+            +LINK_DIA_ID_3+" INTEGER,"
+            +LINK_CIT_ID+" INTEGER"
+            +")";
+
+
 
     public DatabaseHelper(Context context){
         super(context,DATABASE_NAME, null, DATABASE_VERSION);
@@ -112,6 +140,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(CREATE_TABLE_CATS);
         db.execSQL(CREATE_TABLE_FACTS);
         db.execSQL(CREATE_LINKING_TABLE_MAIN_FACTS);
+        db.execSQL(CREATE_TABLE_CITATION);
+        db.execSQL(CREATE_LINKING_TABLE_MAIN_CITATION);
 
     }
 
@@ -124,6 +154,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS "+TABLE_FACTS);
         db.execSQL("DROP TABLE IF EXISTS "+TABLE_LINK_MAIN_CATS);
         db.execSQL("DROP TABLE IF EXISTS "+TABLE_LINK_MAIN_FACTS);
+        db.execSQL("DROP TABLE IF EXISTS "+TABLE_CITATION);
+        db.execSQL("DROP TABLE IF EXISTS "+TABLE_LINK_MAIN_CITATION);
+
 
         //create new tables
         onCreate(db);
@@ -224,6 +257,18 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         long id = db.insert(TABLE_LINK_MAIN_FACTS, null, values);
 
         return id;
+    }
+
+    public long createCitation(DatabaseCitationEntry cit){
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(CITATION_ENGLISH, cit.getDiagnosis_citation_english());
+        values.put(CITATION_GERMAN, cit.getDiagnosis_citation_german());
+
+        long cit_id = db.insert(TABLE_CITATION, null, values);
+
+        return cit_id;
     }
 
 

@@ -4,17 +4,11 @@
 
 
         <item
-            android:id="@+id/action_user"
+            android:id="@+id/citation_info"
             android:orderInCategory="300"
             android:title="User"
             android:icon="@drawable/ic_info"
             app:showAsAction="ifRoom"/>
 
-        <item
-            android:id="@+id/action_search"
-            android:orderInCategory="200"
-            android:title="Search"
-            android:icon="@mipmap/ic_launcher"
-            app:showAsAction="ifRoom"/>
 
 </menu>

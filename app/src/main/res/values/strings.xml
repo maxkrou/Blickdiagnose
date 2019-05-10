@@ -9,4 +9,5 @@
     <string name="correct_answer_button">Correct</string>
     <string name="wrong_answer_button">Wrong</string>
     <string name="answer_textfield">Answer</string>
+    <string name="author_of_this_file">Information about the author of this file:</string>
 </resources>
