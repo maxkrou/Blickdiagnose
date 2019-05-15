@@ -71,8 +71,8 @@ public class MainActivity extends AppCompatActivity {
         button_statistics.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Intent intent = new Intent(MainActivity.this, DatabaseGUI.class);
-                //startActivity(intent);
+                Intent intent = new Intent(MainActivity.this, ShowResultActivity.class);
+                startActivity(intent);
                // mDatabaseHelper.addData(1,"test123");
 
 

@@ -5,7 +5,7 @@
     <string name="individual_start_button">Individual start</string>
     <string name="statistics_button">Statistics</string>
     <string name="settings_button">Settings</string>
-    <string name="what_is_the_diagnosis">What is the diagnosis?</string>
+    <string name="what_is_the_diagnosis">Guess the diagnosis!</string>
     <string name="show_answer_button">Show answer</string>
     <string name="correct_answer_button">Correct</string>
     <string name="wrong_answer_button">Wrong</string>
