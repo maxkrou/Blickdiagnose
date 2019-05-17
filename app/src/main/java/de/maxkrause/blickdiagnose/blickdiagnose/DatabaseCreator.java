@@ -84,6 +84,19 @@ public class DatabaseCreator {
         db2.createDiagnosis(diag_6);
 
 
+        Database2DiagnosisEntry diag_7 = new Database2DiagnosisEntry();
+        diag_7.setDiagnosis_name_english("Auer rods");
+        diag_7.setDiagnosis_name_german("Auerstäbchen");
+        diag_7.setImage_path("myeloblast_with_auer_rods");
+        diag_7.setCats_en("Hematology");
+        diag_7.setCats_de("Hämatologie");
+        diag_7.setFacts_en("Rod-shaped granules found in about 30% of all acute myeloid leukemias (AML).§Auer rods are sign of a maturation disorder of the cell.§Cells with bundled Auer rods are called Faggot cells. They occur in AML-M3 (promyelocytic leukemia).");
+        diag_7.setFacts_de("Stäbchenförmige Granula, die man in ca. 30% aller akuten myeloischen Leukämien (AML) findet.§Auerstäbchen sind Zeichen einer Reifungsstörung der Zelle.§Zellen mit gebündelten Auerstäbchen nennt man Faggot-Zellen. Sie treten bei der AML-M3 (Promyelozytenleukämie) auf.");
+        diag_7.setCitation_en("Paulo Henrique Orlandi Mourao [<a href=\"https://creativecommons.org/licenses/by-sa/3.0\">CC BY-SA 3.0</a>], <a href=\"https://commons.wikimedia.org/wiki/File:Myeloblast_with_Auer_rod_smear_2010-01-27.JPG\">via Wikimedia Commons</a>");
+        diag_7.setCitation_de("Paulo Henrique Orlandi Mourao [<a href=\"https://creativecommons.org/licenses/by-sa/3.0\">CC BY-SA 3.0</a>], <a href=\"https://commons.wikimedia.org/wiki/File:Myeloblast_with_Auer_rod_smear_2010-01-27.JPG\">via Wikimedia Commons</a>");
+
+        db2.createDiagnosis(diag_7);
+
 
 
 

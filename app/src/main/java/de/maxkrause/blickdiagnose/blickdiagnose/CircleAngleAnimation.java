@@ -22,5 +22,6 @@ public class CircleAngleAnimation extends Animation {
 
         circle.setAngle(angle);
         circle.requestLayout();
+
     }
 }

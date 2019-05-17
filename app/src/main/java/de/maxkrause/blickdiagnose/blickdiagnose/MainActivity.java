@@ -72,6 +72,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, ShowResultActivity.class);
+                intent.putExtra("maxAnswers", 5);
+                intent.putExtra("correctAnswers", 5);
                 startActivity(intent);
                // mDatabaseHelper.addData(1,"test123");
 

@@ -11,7 +11,7 @@
         android:id="@+id/tool_bar"
         layout="@layout/tool_bar" />
 
-    <ImageView
+    <com.github.chrisbanes.photoview.PhotoView
         android:id="@+id/image_view_diagnosis"
         android:layout_width="0dp"
         android:layout_height="wrap_content"

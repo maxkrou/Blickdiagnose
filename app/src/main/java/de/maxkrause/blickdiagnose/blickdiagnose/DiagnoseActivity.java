@@ -5,6 +5,8 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.DatabaseUtils;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
@@ -27,6 +29,8 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toolbar;
 
+import com.github.chrisbanes.photoview.PhotoView;
+
 import java.io.File;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -35,7 +39,7 @@ import java.util.Locale;
 
 public class DiagnoseActivity extends AppCompatActivity {
 
-    ImageView imageViewDiagnosisImage;
+    PhotoView imageViewDiagnosisImage;
     Button buttonShowAnswer;
     Button buttonCorrectAnswer;
     Button buttonWrongAnswer;
@@ -53,12 +57,14 @@ public class DiagnoseActivity extends AppCompatActivity {
     Locale enLocale;
     Locale deLocale;
 
-    int counter = 0;
+
 
     DatabaseHelper databaseHelper = new DatabaseHelper(MainActivity.cont);
     DatabaseHelper2 databaseHelper2 = new DatabaseHelper2(MainActivity.cont);
 
-
+    int counter = 0;
+    int rowCountTable = (int) databaseHelper2.getRowCountDB();
+    int correctAnswers = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -147,16 +153,31 @@ public class DiagnoseActivity extends AppCompatActivity {
         buttonCorrectAnswer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                counter++;
-                buttonShowAnswer.setVisibility(View.VISIBLE);
-                buttonCorrectAnswer.setVisibility(View.GONE);
-                buttonWrongAnswer.setVisibility(View.GONE);
-                scrollViewDiagnosisFacts.setVisibility(View.GONE);
-                textViewAnswer.setVisibility(View.GONE);
 
-                Context context = imageViewDiagnosisImage.getContext();
-                int id = context.getResources().getIdentifier(dias2.get(counter).getImage_path(), "drawable", context.getPackageName());
-                imageViewDiagnosisImage.setImageResource(id);
+                correctAnswers++;
+                counter++;
+                if(counter<rowCountTable) {
+                    buttonShowAnswer.setVisibility(View.VISIBLE);
+                    buttonCorrectAnswer.setVisibility(View.GONE);
+                    buttonWrongAnswer.setVisibility(View.GONE);
+                    scrollViewDiagnosisFacts.setVisibility(View.GONE);
+                    textViewAnswer.setVisibility(View.GONE);
+
+                    Context context = imageViewDiagnosisImage.getContext();
+                    int id = context.getResources().getIdentifier(dias2.get(counter).getImage_path(), "drawable", context.getPackageName());
+                    imageViewDiagnosisImage.setImageResource(id);
+                }
+                else{
+                    Intent intent = new Intent(DiagnoseActivity.this, ShowResultActivity.class);
+                    intent.putExtra("maxAnswers", rowCountTable);
+                    intent.putExtra("correctAnswers", correctAnswers);
+                    startActivity(intent);
+
+                }
+
+
+
+
             }
         });
 
@@ -164,15 +185,24 @@ public class DiagnoseActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 counter++;
-                buttonShowAnswer.setVisibility(View.VISIBLE);
-                buttonCorrectAnswer.setVisibility(View.GONE);
-                buttonWrongAnswer.setVisibility(View.GONE);
-                scrollViewDiagnosisFacts.setVisibility(View.GONE);
-                textViewAnswer.setVisibility(View.GONE);
+                if(counter<rowCountTable) {
+                    buttonShowAnswer.setVisibility(View.VISIBLE);
+                    buttonCorrectAnswer.setVisibility(View.GONE);
+                    buttonWrongAnswer.setVisibility(View.GONE);
+                    scrollViewDiagnosisFacts.setVisibility(View.GONE);
+                    textViewAnswer.setVisibility(View.GONE);
 
-                Context context = imageViewDiagnosisImage.getContext();
-                int id = context.getResources().getIdentifier(dias2.get(counter).getImage_path(), "drawable", context.getPackageName());
-                imageViewDiagnosisImage.setImageResource(id);
+                    Context context = imageViewDiagnosisImage.getContext();
+                    int id = context.getResources().getIdentifier(dias2.get(counter).getImage_path(), "drawable", context.getPackageName());
+                    imageViewDiagnosisImage.setImageResource(id);
+                }
+                else{
+                    Intent intent = new Intent(DiagnoseActivity.this, ShowResultActivity.class);
+                    intent.putExtra("maxAnswers", rowCountTable);
+                    intent.putExtra("correctAnswers", correctAnswers);
+                    startActivity(intent);
+                }
+
             }
         });
     }
@@ -254,14 +284,17 @@ public class DiagnoseActivity extends AppCompatActivity {
 
     public ArrayList<Integer> getUniqueRandomNumbers() {
         ArrayList<Integer> list = new ArrayList<Integer>();
-        for (int i = 1; i < 6; i++) {
+        for (int i = 1; i <= rowCountTable; i++) {
             list.add(new Integer(i));
         }
         Collections.shuffle(list);
-
         return list;
-
     }
+
+
+
+
+
 }
 
 

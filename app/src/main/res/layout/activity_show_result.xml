@@ -7,7 +7,7 @@
     tools:context=".ShowResultActivity">
 
     <de.maxkrause.blickdiagnose.blickdiagnose.Circle
-        android:id="@+id/circle"
+        android:id="@+id/circle_green"
         android:layout_width="300dp"
         android:layout_height="300dp"
         android:layout_marginStart="1dp"
@@ -16,6 +16,29 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <de.maxkrause.blickdiagnose.blickdiagnose.Circle
+        android:id="@+id/circle_red"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="TextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/circle_green" />
 
 
 </android.support.constraint.ConstraintLayout>

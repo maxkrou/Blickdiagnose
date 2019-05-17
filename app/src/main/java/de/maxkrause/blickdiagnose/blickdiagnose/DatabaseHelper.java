@@ -3,6 +3,7 @@ package de.maxkrause.blickdiagnose.blickdiagnose;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
@@ -357,6 +358,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         if (db != null && db.isOpen())
             db.close();
     }
+
+    public long getProfilesCount() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        long count = DatabaseUtils.queryNumEntries(db, TABLE_MAIN);
+        db.close();
+        return count;
+    }
+
 
 
 /*
